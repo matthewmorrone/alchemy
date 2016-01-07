@@ -1,0 +1,677 @@
+<html
+<head>
+<title>Alchemy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+<script src="https://code.jquery.com/color/jquery.color.plus-names-2.1.2.js"></script>
+<script src="https://rawgit.com/flatiron/director/master/build/director.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+<script src="https://cdn.rawgit.com/namuol/cheet.js/master/cheet.js"></script>
+<link rel="stylesheet" href="https://matthewmorrone.com/reset.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-beta.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="alchemy.css">
+<style>
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	background-color: rgba(0, 0, 0, 0.25);
+	width: 60%;
+	margin: auto;
+	margin-top: 100px;
+}
+div {
+	background-color: rgba(0, 0, 0, 0.25);
+	display: inline-block;
+	margin: 0px;
+	margin-right: -2px;
+	border: 1px solid black;
+	padding: 0px;
+	width: 74px;
+	height: 74px;
+}
+.invert {
+	-webkit-filter: invert(100%);
+}
+.transparent {
+	opacity: 0;
+}
+.opaque {
+	opacity: 1;
+}
+</style>
+<script>
+$ = jQuery
+$.fn.randomize = function(childEl) {
+	return $(this).each(function() {
+		var $this = $(this), elems = $this.children(childEl)
+		elems.sort(function() {
+			return Math.round(Math.random()) - 0.5
+		})
+		$this.detach(childEl)
+		for(var i = 0; i < elems.length; i++) {
+			$this.append(elems[i])
+		}
+	})
+}
+$.fn.style = $.fn.css
+var log = console.log.bind(console)
+var tile1, tile2
+$(function() {
+	// $("div").slice(138).remove()
+	$("div").slice(49).remove()
+	$("div").each(function() {$(this).after($(this).clone())})
+	$("body").randomize("div")
+	// $("div").sortable({})
+	// $("div").draggable({snap: true, grid: [74, 74]})
+	$("div").disableSelection()
+	$(document).on("click", "div", function() {
+		if ($(this).hasClass("done")) {
+			return
+		}
+		if (!tile1) {
+			tile1 = $(this)
+			tile1.toggleClass($(this).attr("title")).toggleClass("blank")
+			log(tile1.attr("title"))
+			return
+		}
+		if (tile1 && !tile2) {
+			tile2 = $(this)
+			tile2.toggleClass($(this).attr("title")).toggleClass("blank")
+			log(tile2.attr("title"))
+			return
+		}
+		if (tile1 && tile2) {
+			log(tile1.attr("title"), tile2.attr("title"), tile1.attr("title") !== tile2.attr("title"))
+			if (tile1.attr("title") !== tile2.attr("title")) {
+				tile1.removeClass(tile1.attr("title"))
+				tile2.removeClass(tile2.attr("title"))
+			}
+			else {
+				tile1.addClass("done")
+				tile2.addClass("done")				
+			}
+			tile1 = undefined
+			tile2 = undefined
+			$(this).click()
+		}
+
+		// $(this).toggleClass($(this).attr("title")).toggleClass("blank")
+
+
+
+		// if ($(this).hasClass("blank")) {
+		//	$(this).removeClass("blank").addClass($(this).attr("title"))
+		// }
+		// else {
+		//	$(this).removeClass($(this).attr("title")).addClass("blank")
+		// }
+	})
+})
+</script>
+
+</head>
+<body>
+
+<div class="blank" title="water"></div>
+<div class="blank" title="fire"></div>
+<div class="blank" title="earth"></div>
+<div class="blank" title="air"></div>
+<div class="blank" title="steam"></div>
+<div class="blank" title="lava"></div>
+<div class="blank" title="pressure"></div>
+<div class="blank" title="volcano"></div>
+<div class="blank" title="sea"></div>
+<div class="blank" title="ocean"></div>
+<div class="blank" title="energy"></div>
+<div class="blank" title="mud"></div>
+<div class="blank" title="rain"></div>
+<div class="blank" title="dust"></div>
+<div class="blank" title="cloud"></div>
+<div class="blank" title="storm"></div>
+<div class="blank" title="geyser"></div>
+<div class="blank" title="isle"></div>
+<div class="blank" title="earthquake"></div>
+<div class="blank" title="wind"></div>
+<div class="blank" title="eruption"></div>
+<div class="blank" title="sky"></div>
+<div class="blank" title="hurricane"></div>
+<div class="blank" title="plant"></div>
+<div class="blank" title="gunpowder"></div>
+<div class="blank" title="explosion"></div>
+<div class="blank" title="stone"></div>
+<div class="blank" title="sand"></div>
+<div class="blank" title="ash"></div>
+<div class="blank" title="coal"></div>
+<div class="blank" title="diamond"></div>
+<div class="blank" title="glass"></div>
+<div class="blank" title="hourglass"></div>
+<div class="blank" title="aquarium"></div>
+<div class="blank" title="greenhouse"></div>
+<div class="blank" title="metal"></div>
+<div class="blank" title="rust"></div>
+<div class="blank" title="boiler"></div>
+<div class="blank" title="bullet"></div>
+<div class="blank" title="steel"></div>
+<div class="blank" title="time"></div>
+<div class="blank" title="tree"></div>
+<div class="blank" title="swamp"></div>
+<div class="blank" title="life"></div>
+<div class="blank" title="plankton"></div>
+<div class="blank" title="bird"></div>
+<div class="blank" title="phoenix"></div>
+<div class="blank" title="human"></div>
+<div class="blank" title="egg"></div>
+<div class="blank" title="clay"></div>
+<div class="blank" title="golem"></div>
+<div class="blank" title="pottery"></div>
+<div class="blank" title="tool"></div>
+<div class="blank" title="steam-engine"></div>
+<div class="blank" title="blade"></div>
+<div class="blank" title="wood"></div>
+<div class="blank" title="axe"></div>
+<div class="blank" title="forest"></div>
+<div class="blank" title="love"></div>
+<div class="blank" title="lumberjack"></div>
+<div class="blank" title="train"></div>
+<div class="blank" title="steamboat"></div>
+<div class="blank" title="campfire"></div>
+<div class="blank" title="hard-roe"></div>
+<div class="blank" title="omelette"></div>
+<div class="blank" title="caviar"></div>
+<div class="blank" title="turtle"></div>
+<div class="blank" title="fish"></div>
+<div class="blank" title="lizard"></div>
+<div class="blank" title="field"></div>
+<div class="blank" title="farmer"></div>
+<div class="blank" title="house"></div>
+<div class="blank" title="livestock"></div>
+<div class="blank" title="chicken"></div>
+<div class="blank" title="grass"></div>
+<div class="blank" title="cow"></div>
+<div class="blank" title="milk"></div>
+<div class="blank" title="cheese"></div>
+<div class="blank" title="moon"></div>
+<div class="blank" title="tobacco"></div>
+<div class="blank" title="pipe"></div>
+<div class="blank" title="wheel"></div>
+<div class="blank" title="bicycle"></div>
+<div class="blank" title="wheat"></div>
+<div class="blank" title="flour"></div>
+<div class="blank" title="dough"></div>
+<div class="blank" title="bread"></div>
+<div class="blank" title="fruit"></div>
+<div class="blank" title="pie"></div>
+<div class="blank" title="meat"></div>
+<div class="blank" title="sandwich"></div>
+<div class="blank" title="smoke"></div>
+<div class="blank" title="ham"></div>
+<div class="blank" title="gun"></div>
+<div class="blank" title="corpse"></div>
+<div class="blank" title="zombie"></div>
+<div class="blank" title="coffin"></div>
+<div class="blank" title="grave"></div>
+<div class="blank" title="graveyard"></div>
+<div class="blank" title="boat"></div>
+<div class="blank" title="desert"></div>
+<div class="blank" title="cactus"></div>
+<div class="blank" title="seaweed"></div>
+<div class="blank" title="dragon"></div>
+<div class="blank" title="cyclist"></div>
+<div class="blank" title="fireman"></div>
+<div class="blank" title="beach"></div>
+<div class="blank" title="sun"></div>
+<div class="blank" title="palm"></div>
+<div class="blank" title="rainbow"></div>
+<div class="blank" title="tsunami"></div>
+<div class="blank" title="blood"></div>
+<div class="blank" title="sailboat"></div>
+<div class="blank" title="electricity"></div>
+<div class="blank" title="light-bulb"></div>
+<div class="blank" title="christmas-tree"></div>
+<div class="blank" title="clock"></div>
+<div class="blank" title="frankenstein"></div>
+<div class="blank" title="wire"></div>
+<div class="blank" title="chainsaw"></div>
+<div class="blank" title="electrician"></div>
+<div class="blank" title="light"></div>
+<div class="blank" title="electric-eel"></div>
+<div class="blank" title="sunflower"></div>
+<div class="blank" title="oil"></div>
+<div class="blank" title="day"></div>
+<div class="blank" title="night"></div>
+<div class="blank" title="solar-cell"></div>
+<div class="blank" title="eclipse"></div>
+<div class="blank" title="wave"></div>
+<div class="blank" title="tide"></div>
+<div class="blank" title="fireplace"></div>
+<div class="blank" title="sundial"></div>
+<div class="blank" title="double-rainbow!"></div>
+<div class="blank" title="scythe"></div>
+<div class="blank" title="gravestone"></div>
+<div class="blank" title="twilight"></div>
+<div class="blank" title="flute"></div>
+<div class="blank" title="water-pipe"></div>
+<div class="blank" title="wild-animal"></div>
+<div class="blank" title="snake"></div>
+<div class="blank" title="sickness"></div>
+<div class="blank" title="cold"></div>
+<div class="blank" title="snow"></div>
+<div class="blank" title="seasickness"></div>
+<div class="blank" title="snowman"></div>
+<div class="blank" title="toast"></div>
+<div class="blank" title="ice"></div>
+<div class="blank" title="sword"></div>
+<div class="blank" title="penguin"></div>
+<div class="blank" title="windmill"></div>
+<div class="blank" title="acid-rain"></div>
+<div class="blank" title="airplane"></div>
+<div class="blank" title="algae"></div>
+<div class="blank" title="allergy"></div>
+<div class="blank" title="alligator"></div>
+<div class="blank" title="warrior"></div>
+<div class="blank" title="angel"></div>
+<div class="blank" title="antarctica"></div>
+<div class="blank" title="archipelago"></div>
+<div class="blank" title="armor"></div>
+<div class="blank" title="astronaut"></div>
+<div class="blank" title="atmosphere"></div>
+<div class="blank" title="atomic-bomb"></div>
+<div class="blank" title="pig"></div>
+<div class="blank" title="bacteria"></div>
+<div class="blank" title="barn"></div>
+<div class="blank" title="bayonet"></div>
+<div class="blank" title="beaver"></div>
+<div class="blank" title="birdhouse"></div>
+<div class="blank" title="blizzard"></div>
+<div class="blank" title="brick"></div>
+<div class="blank" title="owl"></div>
+<div class="blank" title="butcher"></div>
+<div class="blank" title="car"></div>
+<div class="blank" title="charcoal"></div>
+<div class="blank" title="star"></div>
+<div class="blank" title="knight"></div>
+<div class="blank" title="cuckoo"></div>
+<div class="blank" title="dinosaur"></div>
+<div class="blank" title="dog"></div>
+<div class="blank" title="duck"></div>
+<div class="blank" title="dune"></div>
+<div class="blank" title="engineer"></div>
+<div class="blank" title="glasses"></div>
+<div class="blank" title="family"></div>
+<div class="blank" title="fruit-tree"></div>
+<div class="blank" title="orchard"></div>
+<div class="blank" title="fireworks"></div>
+<div class="blank" title="flood"></div>
+<div class="blank" title="fog"></div>
+<div class="blank" title="garden"></div>
+<div class="blank" title="grenade"></div>
+<div class="blank" title="hail"></div>
+<div class="blank" title="hay"></div>
+<div class="blank" title="hero"></div>
+<div class="blank" title="horizon"></div>
+<div class="blank" title="horse"></div>
+<div class="blank" title="hospital"></div>
+<div class="blank" title="ice-cream"></div>
+<div class="blank" title="mountain"></div>
+<div class="blank" title="glacier"></div>
+<div class="blank" title="alcohol"></div>
+<div class="blank" title="nerd"></div>
+<div class="blank" title="cart"></div>
+<div class="blank" title="wagon"></div>
+<div class="blank" title="doctor"></div>
+<div class="blank" title="paper"></div>
+<div class="blank" title="newspaper"></div>
+<div class="blank" title="salt"></div>
+<div class="blank" title="vampire"></div>
+<div class="blank" title="sunglasses"></div>
+<div class="blank" title="igloo"></div>
+<div class="blank" title="sandstorm"></div>
+<div class="blank" title="oasis"></div>
+<div class="blank" title="robot"></div>
+<div class="blank" title="sushi"></div>
+<div class="blank" title="treehouse"></div>
+<div class="blank" title="unicorn"></div>
+<div class="blank" title="bacon"></div>
+<div class="blank" title="cigarette"></div>
+<div class="blank" title="pilot"></div>
+<div class="blank" title="seahorse"></div>
+<div class="blank" title="fossil"></div>
+<div class="blank" title="ring"></div>
+<div class="blank" title="pegasus"></div>
+<div class="blank" title="shark"></div>
+<div class="blank" title="space"></div>
+<div class="blank" title="yogurt"></div>
+<div class="blank" title="computer"></div>
+<div class="blank" title="mouse"></div>
+<div class="blank" title="baker"></div>
+<div class="blank" title="pencil"></div>
+<div class="blank" title="starfish"></div>
+<div class="blank" title="wine"></div>
+<div class="blank" title="telescope"></div>
+<div class="blank" title="pizza"></div>
+<div class="blank" title="cat"></div>
+<div class="blank" title="sound"></div>
+<div class="blank" title="lightsaber"></div>
+<div class="blank" title="jedi"></div>
+<div class="blank" title="wolf"></div>
+<div class="blank" title="werewolf"></div>
+<div class="blank" title="grim-reaper"></div>
+<div class="blank" title="sailor"></div>
+<div class="blank" title="camel"></div>
+<div class="blank" title="wall"></div>
+<div class="blank" title="planet"></div>
+<div class="blank" title="rocket"></div>
+<div class="blank" title="swordfish"></div>
+<div class="blank" title="drunk"></div>
+<div class="blank" title="music"></div>
+<div class="blank" title="smog"></div>
+<div class="blank" title="beer"></div>
+<div class="blank" title="seagull"></div>
+<div class="blank" title="juice"></div>
+<div class="blank" title="village"></div>
+<div class="blank" title="scissors"></div>
+<div class="blank" title="story"></div>
+<div class="blank" title="letter"></div>
+<div class="blank" title="coconut"></div>
+<div class="blank" title="coconut-milk"></div>
+<div class="blank" title="sugar"></div>
+<div class="blank" title="bat"></div>
+<div class="blank" title="squirrel"></div>
+<div class="blank" title="river"></div>
+<div class="blank" title="cookie"></div>
+<div class="blank" title="iceberg"></div>
+<div class="blank" title="vulture"></div>
+<div class="blank" title="bone"></div>
+<div class="blank" title="castle"></div>
+<div class="blank" title="centaur"></div>
+<div class="blank" title="nest"></div>
+<div class="blank" title="lion"></div>
+<div class="blank" title="doghouse"></div>
+<div class="blank" title="skyscraper"></div>
+<div class="blank" title="dynamite"></div>
+<div class="blank" title="goat"></div>
+<div class="blank" title="cereal"></div>
+<div class="blank" title="black-hole"></div>
+<div class="blank" title="caramel"></div>
+<div class="blank" title="astronaut-ice-cream"></div>
+<div class="blank" title="lighthouse"></div>
+<div class="blank" title="surfer"></div>
+<div class="blank" title="monkey"></div>
+<div class="blank" title="idea"></div>
+<div class="blank" title="galaxy"></div>
+<div class="blank" title="lamp"></div>
+<div class="blank" title="mirror"></div>
+<div class="blank" title="meteoroid"></div>
+<div class="blank" title="meteor"></div>
+<div class="blank" title="platypus"></div>
+<div class="blank" title="pirate"></div>
+<div class="blank" title="lava-lamp"></div>
+<div class="blank" title="hamburger"></div>
+<div class="blank" title="email"></div>
+<div class="blank" title="prism"></div>
+<div class="blank" title="sandpaper"></div>
+<div class="blank" title="kite"></div>
+<div class="blank" title="origami"></div>
+<div class="blank" title="darth-vader"></div>
+<div class="blank" title="statue"></div>
+<div class="blank" title="city"></div>
+<div class="blank" title="eagle"></div>
+<div class="blank" title="watch"></div>
+<div class="blank" title="ambulance"></div>
+<div class="blank" title="manatee"></div>
+<div class="blank" title="ski-goggles"></div>
+<div class="blank" title="swim-goggles"></div>
+<div class="blank" title="cyborg"></div>
+<div class="blank" title="mermaid"></div>
+<div class="blank" title="sheep"></div>
+<div class="blank" title="alien"></div>
+<div class="blank" title="book"></div>
+<div class="blank" title="batman"></div>
+<div class="blank" title="dam"></div>
+<div class="blank" title="internet"></div>
+<div class="blank" title="motorcycle"></div>
+<div class="blank" title="avalanche"></div>
+<div class="blank" title="leather"></div>
+<div class="blank" title="wizard"></div>
+<div class="blank" title="faun"></div>
+<div class="blank" title="gold"></div>
+<div class="blank" title="moss"></div>
+<div class="blank" title="egg-timer"></div>
+<div class="blank" title="butter"></div>
+<div class="blank" title="oxygen"></div>
+<div class="blank" title="pyramid"></div>
+<div class="blank" title="sand-castle"></div>
+<div class="blank" title="yoda"></div>
+<div class="blank" title="umbrella"></div>
+<div class="blank" title="pond"></div>
+<div class="blank" title="wool"></div>
+<div class="blank" title="scarecrow"></div>
+<div class="blank" title="carbon-dioxide"></div>
+<div class="blank" title="monarch"></div>
+<div class="blank" title="bridge"></div>
+<div class="blank" title="broom"></div>
+<div class="blank" title="leaf"></div>
+<div class="blank" title="fridge"></div>
+<div class="blank" title="printer"></div>
+<div class="blank" title="scorpion"></div>
+<div class="blank" title="santa"></div>
+<div class="blank" title="reindeer"></div>
+<div class="blank" title="sledge"></div>
+<div class="blank" title="candy-cane"></div>
+<div class="blank" title="christmas-stocking"></div>
+<div class="blank" title="chimney"></div>
+<div class="blank" title="sweater"></div>
+<div class="blank" title="gift"></div>
+<div class="blank" title="snowball"></div>
+<div class="blank" title="snowboard"></div>
+<div class="blank" title="armadillo"></div>
+<div class="blank" title="pigeon"></div>
+<div class="blank" title="seaplane"></div>
+<div class="blank" title="narwhal"></div>
+<div class="blank" title="piranha"></div>
+<div class="blank" title="titanic"></div>
+<div class="blank" title="obsidian"></div>
+<div class="blank" title="mummy"></div>
+<div class="blank" title="money"></div>
+<div class="blank" title="flying-fish"></div>
+<div class="blank" title="tank"></div>
+<div class="blank" title="solar-system"></div>
+<div class="blank" title="paper-airplane"></div>
+<div class="blank" title="banana"></div>
+<div class="blank" title="sandstone"></div>
+<div class="blank" title="parrot"></div>
+<div class="blank" title="dry-ice"></div>
+<div class="blank" title="flashlight"></div>
+<div class="blank" title="dew"></div>
+<div class="blank" title="trojan-horse"></div>
+<div class="blank" title="catnip"></div>
+<div class="blank" title="scalpel"></div>
+<div class="blank" title="skateboard"></div>
+<div class="blank" title="alarm-clock"></div>
+<div class="blank" title="water-gun"></div>
+<div class="blank" title="wind-turbine"></div>
+<div class="blank" title="piggy-bank"></div>
+<div class="blank" title="sloth"></div>
+<div class="blank" title="marshmallows"></div>
+<div class="blank" title="seal"></div>
+<div class="blank" title="helicopter"></div>
+<div class="blank" title="tea"></div>
+<div class="blank" title="picnic"></div>
+<div class="blank" title="peacock"></div>
+<div class="blank" title="rose"></div>
+<div class="blank" title="flower"></div>
+<div class="blank" title="hummingbird"></div>
+<div class="blank" title="chameleon"></div>
+<div class="blank" title="fox"></div>
+<div class="blank" title="wild-boar"></div>
+<div class="blank" title="firetruck"></div>
+<div class="blank" title="medusa"></div>
+<div class="blank" title="flying-squirrel"></div>
+<div class="blank" title="fence"></div>
+<div class="blank" title="electric-car"></div>
+<div class="blank" title="ostrich"></div>
+<div class="blank" title="milk-shake"></div>
+<div class="blank" title="map"></div>
+<div class="blank" title="lawn-mower"></div>
+<div class="blank" title="mousetrap"></div>
+<div class="blank" title="cotton"></div>
+<div class="blank" title="thread"></div>
+<div class="blank" title="fabric"></div>
+<div class="blank" title="bank"></div>
+<div class="blank" title="excalibur"></div>
+<div class="blank" title="popsicle"></div>
+<div class="blank" title="woodpecker"></div>
+<div class="blank" title="wand"></div>
+<div class="blank" title="pirate-ship"></div>
+<div class="blank" title="constellation"></div>
+<div class="blank" title="computer-mouse"></div>
+<div class="blank" title="pasta"></div>
+<div class="blank" title="shuriken"></div>
+<div class="blank" title="ninja"></div>
+<div class="blank" title="saddle"></div>
+<div class="blank" title="sheet-music"></div>
+<div class="blank" title="donut"></div>
+<div class="blank" title="fishing-rod"></div>
+<div class="blank" title="lemonade"></div>
+<div class="blank" title="mayonnaise"></div>
+<div class="blank" title="confetti"></div>
+<div class="blank" title="witch"></div>
+<div class="blank" title="skeleton"></div>
+<div class="blank" title="spider"></div>
+<div class="blank" title="web"></div>
+<div class="blank" title="ghost"></div>
+<div class="blank" title="vegetable"></div>
+<div class="blank" title="pumpkin"></div>
+<div class="blank" title="crystal-ball"></div>
+<div class="blank" title="jack-o'-lantern"></div>
+<div class="blank" title="bee"></div>
+<div class="blank" title="butterfly"></div>
+<div class="blank" title="beehive"></div>
+<div class="blank" title="honey"></div>
+<div class="blank" title="wax"></div>
+<div class="blank" title="candle"></div>
+<div class="blank" title="water-lily"></div>
+<div class="blank" title="hippo"></div>
+<div class="blank" title="petroleum"></div>
+<div class="blank" title="pinocchio"></div>
+<div class="blank" title="wrapping-paper"></div>
+<div class="blank" title="minotaur"></div>
+<div class="blank" title="vase"></div>
+<div class="blank" title="space-station"></div>
+<div class="blank" title="soap"></div>
+<div class="blank" title="fountain"></div>
+<div class="blank" title="needle"></div>
+<div class="blank" title="drum"></div>
+<div class="blank" title="batter"></div>
+<div class="blank" title="snowmobile"></div>
+<div class="blank" title="rat"></div>
+<div class="blank" title="sphinx"></div>
+<div class="blank" title="jam"></div>
+<div class="blank" title="cheeseburger"></div>
+<div class="blank" title="crow"></div>
+<div class="blank" title="taser"></div>
+<div class="blank" title="cannon"></div>
+<div class="blank" title="blender"></div>
+<div class="blank" title="bulletproof-vest"></div>
+<div class="blank" title="pitchfork"></div>
+<div class="blank" title="ufo"></div>
+<div class="blank" title="cake"></div>
+<div class="blank" title="bbq"></div>
+<div class="blank" title="swimmer"></div>
+<div class="blank" title="angler"></div>
+<div class="blank" title="farm"></div>
+<div class="blank" title="ruins"></div>
+<div class="blank" title="steak"></div>
+<div class="blank" title="spaceship"></div>
+<div class="blank" title="godzilla"></div>
+<div class="blank" title="horseshoe"></div>
+<div class="blank" title="soda"></div>
+<div class="blank" title="tractor"></div>
+<div class="blank" title="frog"></div>
+<div class="blank" title="mailman"></div>
+<div class="blank" title="bandage"></div>
+<div class="blank" title="log-cabin"></div>
+<div class="blank" title="bus"></div>
+<div class="blank" title="alpaca"></div>
+<div class="blank" title="rope"></div>
+<div class="blank" title="puddle"></div>
+<div class="blank" title="grilled-cheese"></div>
+<div class="blank" title="pterodactyl"></div>
+<div class="blank" title="snow-globe"></div>
+<div class="blank" title="flamethrower"></div>
+<div class="blank" title="waterfall"></div>
+<div class="blank" title="ozone"></div>
+<div class="blank" title="ant"></div>
+<div class="blank" title="paint"></div>
+<div class="blank" title="treasure-map"></div>
+<div class="blank" title="treasure"></div>
+<div class="blank" title="hammer"></div>
+<div class="blank" title="mountain-range"></div>
+<div class="blank" title="family-tree"></div>
+<div class="blank" title="rv"></div>
+<div class="blank" title="mold"></div>
+<div class="blank" title="bakery"></div>
+<div class="blank" title="ice-cream-truck"></div>
+<div class="blank" title="gardener"></div>
+<div class="blank" title="super-nova"></div>
+<div class="blank" title="doge"></div>
+<div class="blank" title="the-one-ring"></div>
+<div class="blank" title="keyboard-cat"></div>
+<div class="blank" title="ninja-turtle"></div>
+<div class="blank" title="gingerbread-man"></div>
+<div class="blank" title="gingerbread-house"></div>
+<div class="blank" title="safety-glasses"></div>
+<div class="blank" title="hay-bale"></div>
+<div class="blank" title="harp"></div>
+<div class="blank" title="fortune-cookie"></div>
+<div class="blank" title="chicken-wing"></div>
+<div class="blank" title="recipe"></div>
+<div class="blank" title="french-fries"></div>
+<div class="blank" title="ruler"></div>
+<div class="blank" title="chicken-soup"></div>
+<div class="blank" title="iced-tea"></div>
+<div class="blank" title="tyrannosaurus-rex"></div>
+<div class="blank" title="lake"></div>
+<div class="blank" title="duckling"></div>
+<div class="blank" title="toucan"></div>
+<div class="blank" title="optical-fiber"></div>
+<div class="blank" title="stethoscope"></div>
+<div class="blank" title="mac-and-cheese"></div>
+<div class="blank" title="nessie"></div>
+<div class="blank" title="banana-bread"></div>
+<div class="blank" title="drone"></div>
+<div class="blank" title="jerky"></div>
+<div class="blank" title="fairy-tale"></div>
+<div class="blank" title="ivy"></div>
+<div class="blank" title="hamster"></div>
+<div class="blank" title="mountain-goat"></div>
+<div class="blank" title="carrot"></div>
+<div class="blank" title="penicillin"></div>
+<div class="blank" title="vacuum-cleaner"></div>
+<div class="blank" title="yeti"></div>
+<div class="blank" title="aurora"></div>
+<div class="blank" title="bonsai-tree"></div>
+<div class="blank" title="fire-extinguisher"></div>
+<div class="blank" title="gnome"></div>
+<div class="blank" title="granite"></div>
+<div class="blank" title="hedge"></div>
+<div class="blank" title="microscope"></div>
+<div class="blank" title="mars"></div>
+<div class="blank" title="roomba"></div>
+<div class="blank" title="smoothie"></div>
+<div class="blank" title="tardis"></div>
+<div class="blank" title="the-doctor"></div>
+
+
+
+</body>
+</html>
+
